@@ -1,0 +1,92 @@
+# Combine this Skript with the Config.sk Skript #
+
+
+# Custom Variables List #
+
+#   Variable |     | Usage | Optional Usage #
+
+# _loc:player ( Location ) - {_loc:%player%} - %{_loc:%player%}% 
+
+# Disabled Configuration Parts
+# To enable remove the "#" before and after the code, to remove it add "#" before it
+
+# Line 30 | 35 - On join UpdateChecker = Disabled
+
+# On join functions #
+
+on first join:
+	set {_p} to player
+
+
+# Updater Module #
+	
+#on join:
+#	if player has permission "chatcore.admincommand.updatechecker" or "chatcore.*" or "chatcore.admin.*":
+#		if text from "https://pastebin.com/raw/SYPBx4NQ" is "V3.0":
+#			send "&a&lCOMPLETE&7! You have the latest version of &eChatCore 3&7!"
+#		if text from "https://pastebin.com/raw/SYPBx4NQ" is not "V3.0":
+#			send "&c&lWARNING&7! You have not got the latest version of &eChatCore 3&7! Please download the &clatest version&7!"
+
+		
+command /updatechecker:
+	description: Checks to see if you have the latest stable build installed!
+	usage: /updatechecker
+	aliases: /uc, /checkupdate, /cu, /chatcore:updatechecker, /chatcore:uc, /chatcore:checkupdate, /chatcore:cu
+	permission: chatcore.admincommand.updatechecker
+	permission message: {@NoPermissionMessage}
+	trigger:
+		if text from "https://pastebin.com/raw/SYPBx4NQ" is "V3.0":
+			send "&a&lCOMPLETE&7! You have the latest version of &eChatCore 3&7!"
+		if text from "https://pastebin.com/raw/SYPBx4NQ" is not "V3.0":
+			send "&c&lWARNING&7! You have not got the latest version of &eChatCore 3&7! Please download the &clatest version&7!"
+	
+
+# Checks your ping by sending a message back to you! 
+	
+command /ping:
+	description: Checks your ping by sending a message back to you!
+	usage: /ping
+	aliases: /p, /pi, /chatcore:ping, /chatcore:p, /chatcore:pi
+	permission: chatcore.command.ping
+	permission message: {@NoPermissionMessage}
+	trigger:
+		send "&7Ping Test"
+		send "%nl%&7Player Name - &e%player%%nl%"
+		
+# Skript Reloader Command #
+
+command /cc [<text>]:
+	description: Main command for ChatCore 3
+	usage: /cc [<arg-1>]
+	aliases: /chatcore:cc
+	permission: chatcore.command.cc
+	permission message: {@NoPermissionMessage}
+	trigger:
+		if arg 1 is "reload":
+			broadcast "&7ChatCore &e{@Version} &7is reloading..."
+			make console execute command "/sk reload {@SkriptName}"
+			wait 4 seconds
+			broadcast "&aChatCore 3 has been successfully reloaded!"
+		else if arg 1 is not set:
+			send "&7Incorrect Syntax! Missing arg at /cc [<text>] <- &f[HERE]"
+			
+	
+# Anti Hacksuation Module # 
+
+on chat:
+	if player doesn't have permission "chatcore.admin.bypass":
+		if message contains {@AntiHacksuation}:
+			cancel event
+			send "&cNOTE: &7Accusing players of cheating in-game is against the rules. If you think someone is cheating, please gather evidence and report it at &a{@DiscordLink}" 
+			stop
+# Anti Advertise 2 BETA #
+# More  
+on chat:
+	if message contains ".com", ".net", ".de", ".me", ".eu", "eu.", "us.", ".gg" or ".nu":
+		if player does not have permission "chatcore.admin.bypass":
+			cancel event
+			message "&7-------------------------------------------"
+			message "&eAdvertising is against the rules. You will be"
+			message "&epermanently banned from the server if you attempt"
+			message "&eto advertise."
+			message "&7-------------------------------------------"	
