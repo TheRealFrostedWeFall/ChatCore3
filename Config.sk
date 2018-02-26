@@ -1,0 +1,17 @@
+# ChatCore 3.0.0 is finally here # 
+
+options:
+	NoPermissionMessage: &7Sorry &e%{_p}%&7, You can't execute this command as you do not have the required permissions!
+	# This is the default "No permission message"
+	Version: 3.0
+	ConfigVersion: 1
+	AliasCount: 12
+	CommandCount: 1
+	# Please do not edit this! #
+	SkriptName: ChatCore3
+	# Make sure to enter the same name you saved your Skript as! #
+	AntiHacksuation: "hack", "hax", "hacker", "cheat", "hac" or "hacks"
+	# If you think any more words should be added to the Anti Hacksuation list feel free to add them.
+	# You may disable this by scrolling down to line 90 - 94 and inserting "#" at the beginning of each line.
+	DiscordLink: discord.me/yourlink
+	# Type in your discord link above so players know where to report a potential hacker.
