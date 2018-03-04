@@ -15,3 +15,5 @@ options:
 	# You may disable this by scrolling down to line 90 - 94 and inserting "#" at the beginning of each line.
 	DiscordLink: discord.me/yourlink
 	# Type in your discord link above so players know where to report a potential hacker.
+	ChatFormat: 
+	# Please type your exactl essentials chat format however replacing {DISPLAYNAME} with %player% and {MESSAGE} with %message%! #
