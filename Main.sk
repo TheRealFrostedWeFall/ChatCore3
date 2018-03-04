@@ -19,9 +19,9 @@ on first join:
 	
 #on join:
 #	if player has permission "chatcore.admincommand.updatechecker" or "chatcore.*" or "chatcore.admin.*":
-#		if text from "https://pastebin.com/raw/SYPBx4NQ" is "V3.0":
+#		if text from "https://pastebin.com/raw/SYPBx4NQ" is "3.0.0-PRE":
 #			send "&a&lCOMPLETE&7! You have the latest version of &eChatCore 3&7!"
-#		if text from "https://pastebin.com/raw/SYPBx4NQ" is not "V3.0":
+#		if text from "https://pastebin.com/raw/SYPBx4NQ" is not "3.0.0-PRE":
 #			send "&c&lWARNING&7! You have not got the latest version of &eChatCore 3&7! Please download the &clatest version&7!"
 
 		
@@ -32,9 +32,9 @@ command /updatechecker:
 	permission: chatcore.admincommand.updatechecker
 	permission message: {@NoPermissionMessage}
 	trigger:
-		if text from "https://pastebin.com/raw/SYPBx4NQ" is "V3.0":
+		if text from "https://pastebin.com/raw/SYPBx4NQ" is "3.0.0-PRE":
 			send "&a&lCOMPLETE&7! You have the latest version of &eChatCore 3&7!"
-		if text from "https://pastebin.com/raw/SYPBx4NQ" is not "V3.0":
+		if text from "https://pastebin.com/raw/SYPBx4NQ" is not "3.0.0-PRE":
 			send "&c&lWARNING&7! You have not got the latest version of &eChatCore 3&7! Please download the &clatest version&7!"
 	
 
