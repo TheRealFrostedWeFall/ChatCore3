@@ -1,13 +1,3 @@
-# Custom Variables List #
-
-#   Variable |     | Usage | Optional Usage #
-
-# _loc:player ( Location ) - {_loc:%player%} - %{_loc:%player%}% 
-
-# Disabled Configuration Parts
-# To enable remove the "#" before and after the code, to remove it add "#" before it
-
-# Line 30 | 35 - On join UpdateChecker = Disabled
 
 # On join functions #
 

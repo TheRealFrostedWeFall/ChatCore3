@@ -4,7 +4,7 @@ options:
 	NoPermissionMessage: &7Sorry &e%{_p}%&7, You can't execute this command as you do not have the required permissions!
 	# This is the default "No permission message"
 	Version: 3.0
-	ConfigVersion: 1
+	ConfigVersion: 1.0
 	AliasCount: 12
 	CommandCount: 1
 	# Please do not edit this! #
@@ -17,3 +17,13 @@ options:
 	# Type in your discord link above so players know where to report a potential hacker.
 	ChatFormat: 
 	# Please type your exact essentials chat format however replacing {DISPLAYNAME} with %player% and {MESSAGE} with %message%! #
+	# Custom Variables List #
+
+#   Variable |     | Usage | Optional Usage #
+
+# _loc:player ( Location ) - {_loc:%player%} - %{_loc:%player%}% 
+
+# Disabled Configuration Parts
+# To enable remove the "#" before and after the code, to remove it add "#" before it
+
+# Line 30 | 35 - On join UpdateChecker = Disabled
