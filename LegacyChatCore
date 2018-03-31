@@ -1,0 +1,170 @@
+#Thank you for using my FrostChat 1.12.2 Skript#
+#This has been recently updated for 1.12.2 compatibility#
+#Be sure to check out my other Skripts and Plugins below#
+#Just copy and paste the following links into your browser or search engine#
+#https://www.spigotmc.org/resources/%E2%98%85-basicbackpacks-%E2%98%85-the-best-working-backpacks-plugin-%E2%96%BA-constant-updates-%E2%97%84.47339/#
+#https://www.spigotmc.org/resources/playervaults-duplication-protect.45711/
+#https://www.spigotmc.org/resources/frostclearlag.46239/#
+#Thanks for reading, I hope you enjoy my plugin!#
+
+options:
+	prefix: &7[&bFrostCHAT&7]
+	AmountOfMaxWarns: 3 
+	AdminCmdPerm: frostchat.admin 
+	BypassPermission: antiadv.bypass 
+	CancelMessage: true
+	MainCmdAliases: /frostaa /aa /antiad 
+	DontAdvertiseHereMsg: &fPlease do not advertise here. All online staff have been notified.
+	KickOnWarnLimitReach: true
+	Over3WarnsCmd1: ban %arg 1% Advertising more than 3 times.
+	Over3WarnsCmd2: broadcast %arg 1% has just been banned by FrostCHATANTI ADVERTISMENT for advertising more than 3 times!
+	StaffWarnMsg: {@prefix} &7&o%player%&f is advertising! %message%
+	list: ".com" or ".net" or ".co" or ".us" or ".uk" or ".ws" or ".tk" or ".org" or ".to" or "dot." or "dot," or "(dot)"  or  ".192" or "dot" or ".aternos" or ".tech" or ".edu" or "DOT" or " , " or ".de" or ".tl" or ".nl" or ".be" or ".me" or ".info" or ".ly" or ".onion" or ".bit" or ".pl" or ".gl" or ".tv" or ".gs" or ".myserver" or ".club" or ".space" or ".design" or ".rent" or ".bid" or ".trade" or ".webcam" or ".press" or ".io" or ".ca" or ".college" or ".host" or ".es" or ".yoga" or ".financial" or ".flights" or ".guitars" or ".xyz" or ".dj" or ".is" or ".hub" or ".server" or ".webcam" or ".ninja" or ".financial" or ".ca" or ".eu" or ".esy"
+	WarnThePlayer: true
+	StaffWarnMsg: true
+on chat:
+	if message contains {@list}:
+		if player doesn't have permission "{@BypassPermission}":
+			if {@WarnThePlayer} is true:
+				send "{@prefix} {@DontAdvertiseHereMsg}"
+			else:
+				add 1 to {frostantiadv.advs.%player%}
+				loop all players:
+					if loop-player has permission "{@AdminCmdPerm}":
+						if {@StaffWarnMsg} is true:
+							send "{@prefix} {@StaffWarnMsg}" to loop-player
+
+command /frostaa [<offlineplayer>] [<text>] [<text>]:
+	aliases: {@MainCmdAliases}
+	permission: {@AdminCmdPerm}
+	trigger:
+		if arg 1 is not set:
+			send "&7&m--------------------------"
+			send "              {@prefix} &b&lCommands&8:"
+			send "&f"
+			send "&8- &7/frostchat reload"
+			send "&8- &7/frostchat help"
+			send "&8- &7/frostchat version"
+			send "&8- &7/frostchat reload"
+			send "&8- &7/frostaa help"
+			send "&8- &7/frostaa [<offlineplayer>] [<text>] [<text>]:"
+			send "&8- &7/frostaar reset"
+			send "&8- &7/chat help"
+			send "&8- &7/frostaa set"
+			send "&8- &7More commands Coming Soon!"
+			send "&7"
+			send "&7&m--------------------------"
+			stop
+		if arg 1 is "Stats" or "Warns":
+			if arg 2 is set:
+				send "&8&m--------------------------"
+				send "&lStats:"
+				send "&7"
+				send "&eUsername &8- &7%arg 2%"
+				set {_a} to "%{frostantiadv.advs.%arg 2%}%"
+				if {_a} contains "<none>":
+					set {_a} to 0
+				send "&eWarns &8- &7%{_a}%"
+				send "&7"
+				send "&8&m--------------------------"
+				stop
+			else:
+				send "{@prefix} &ePlease enter a valid username."
+		else:
+			if arg 1 is set:
+				if arg 2 is not set:
+					send "&8&m--------------------------"
+					send "                    &4Information:"
+					send "&7"
+					send "&fUsername: &7&o%arg 1%"
+					send "&fWarnings: &7&o%{antiadv.advs.%arg 1%}%"
+					send "&fPlayer UUID: &7&o%uuid of player%"
+					send "&fMax warns before Action: &7&o{@AmountOfMaxWarns}"
+					send "&7"
+					send "&8&m--------------------------"
+					stop
+				else:
+					if arg 1 is "reset":
+						if arg 2 is set:
+							set {frostantiadv.advs.%arg 2%} to 0
+							send "{@prefix} &6%arg 2%'s &earguments have been reset."
+						else:
+							send "{@prefix} &cPlease specify a player."
+					if arg 2 is "set":
+						set {frostantiadv.advs.%arg 1%} to arg 2
+						send "{@prefix} &7&o%arg 1%'s &fadvertisement warnings have been set to %arg 2%."
+						stop
+					if arg 2 is "act" or "action":
+						if arg 3 is set:
+							execute player command "%arg 3%"
+						if arg 3 is not set:
+							send "{@prefix} &fPlease add a command after the players name to execute an action on them.  To have it act on the player, use %player%."
+		if {frostantiadv.advs.%arg 1%} is greater than {@AmountOfMaxWarns}:
+			execute console command "{@Over3WarnsCmd1}"
+			execute console command "{@Over3WarnsCmd2}"
+			if {@KickOnWarnLimitReach} is true:
+				kick the player due to "{@prefix}%new line%&fYou have been warned &7{@AmountOfMaxWarns} &ftimes for advertising%new line%&fand have been kicked.%new line%&fPlease rejoin soon."
+command /frostaar [<text>]:
+	aliases: /aar, /antiar, /chatreset, /antiadvertisement
+	permission: frostchat.reset
+	trigger:
+		if arg-1 is not set:
+			send "{@prefix} &fAre you sure?  If so add 'confirm' after the command you just typed."
+		if arg-1 is "confirm":
+			set {frostantiadv.advs.%all players%} to 0
+			send "{@prefix} &fAdvertisement warnings and kicks have been reset for all players."
+			stop
+		else:
+			send "{@prefix} &fArgument not found."
+command /frostchat [<text>]:
+	aliases: /fchat, /frostc
+	trigger:
+		if arg 1 is "reload":
+			send "{@prefix} &aSkript has been reloaded&8!"
+			console command "/sk reload FrostChat.sk"
+		if arg 1 is "help":
+			send "{@prefix} &6&lCommands&8:"
+			send "&8- &7/frostchat reload"
+			send "&8- &7/frostchat help"
+			send "&8- &7/frostchat version"
+		if arg 1 is not set:
+			send "{@prefix} &6&lHelp&8:"
+			send "&8- &7FrostChat Skript By &aFrostedWeFall"
+			send "&8- &7Version&8: &e1.2.3"
+			send "&8- &7Youtube&8: &dArtzifyHD"
+		if arg 1 is "version":
+			send "&8- &7Version&8: &a1.2.3"
+			send "&8- &7FrostChat Skript By &aFrostedWeFall"
+			send "&8- &7https://www.spigotmc.org/resources/1-12x-frostchat-skript.44229/"
+command /chat [<text>]:
+	permission: frostchat.chat
+	permission message: &cYou don't have permission!
+	trigger:
+		if arg 1 is "help":
+			send "{@prefix} &b&lCommands&8:"
+			send "&8- &7/chat clear"
+			send "&8- &7/chat disable"
+			send "&8- &7/chat enable"
+		if arg 1 is "clear":
+			loop 300 times:
+				broadcast ""
+			broadcast ""
+			broadcast "{@prefix} &2Chat has been cleared by &a%player%"
+		if arg 1 is "disable":
+			set {chat} to false
+			broadcast "{@prefix} &cChat has been disabled by an %player%&8."
+		if arg 1 is "enable":
+			set {chat} to true
+			broadcast "{@prefix} &aChat has been enabled by %player%&8."
+			
+on chat:
+	if {chat} is false:
+		if player has permission "frostchat.chat":
+			cancel event
+			broadcast "&9%player's displayname%&8: &f%message%"
+		else:
+			cancel event
+			send "{@prefix} &cChat has been disabled by an administrator&8!"
+	else:
+		cancel event
+		broadcast "&9%player's displayname%&8: &f%message%"
