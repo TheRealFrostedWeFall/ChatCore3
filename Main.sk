@@ -1,8 +1,53 @@
 
+# ChatCore 3.0.0 is finally here # 
+
+options:
+	NoPermissionMessage: &7Sorry &e%{ChatCore3::%uuid of player%}%&7, You can't execute this command as you do not have the required permissions!
+	
+	# This is the default "No permission message, edit this to whatever you want!"
+	Version: 3.0.0-PRE
+	
+	ConfigVersion: 1
+	AliasCount: 12
+	
+	CommandCount: 1
+	# Please do not edit this! #
+	
+	SkriptName: ChatCore 3
+	# Make sure to enter the same name you saved your Skript as! #
+	
+	AntiHacksuation: "hack", "hax", "hacker", "cheat", "hac" or "hacks"
+	# If you think any more words should be added to the Anti Hacksuation list feel free to add them.
+	
+	AntiSwear: "bitch", "cunt", "dick", "penis", "fuck", "f u", "fuck off", "motherfucker",
+	# If you think any more words should be added or want to add another world to the list feel free to add it following the format!
+	
+	AntiAdvertisment: ".com", ".net", ".de", ".me", ".eu", "eu.", "us.", ".gg" or ".nu"
+	# You may disable this by scrolling down to line 90 - 94 and inserting "#" at the beginning of each line.
+	
+	DiscordLink: discord.me/yourlink
+	# Type in your discord link above so players know where to report a potential hacker.
+	
+	ChatFormat: &9%player's displayname%&8: &f%message%
+	# Please type your exact essentials chat format however replacing {DISPLAYNAME} with %player's displayname% and {MESSAGE} with %message%! #
+
+
+# Custom Variables List #
+
+#   Variable |     | Usage | Optional Usage #
+
+# _loc:player ( Location ) - {_loc:%player%} - %{_loc:%player%}% 
+# {ChatCore3::%uuid of player%} ( Player )
+
+# Disabled Configuration Parts
+# To enable remove the "#" before and after the code, to remove it add "#" before it
+
+# Line 30 | 35 - On join UpdateChecker = Disabled
+
 # On join functions #
 
 on first join:
-	set {_p} to player
+	set {ChatCore3::%uuid of player%} to player
 
 
 # Updater Module #
@@ -55,7 +100,7 @@ command /cc [<text>]:
 			wait 4 seconds
 			broadcast "&aChatCore 3 has been successfully reloaded!"
 		else if arg 1 is not set:
-			send "&7Incorrect Syntax! Missing arg at /cc [<text>] <- &f[HERE]"
+			send "&7Incorrect Syntax! Missing arg at /cc [<arg 1>] <- &f[HERE]"
 			
 # Help Menu #
 
@@ -85,7 +130,7 @@ on chat:
 # Anti Advertise 2 BETA #
 # More  
 on chat:
-	if message contains ".com", ".net", ".de", ".me", ".eu", "eu.", "us.", ".gg" or ".nu":
+	if message contains {@AntiAdvertisment}:
 		if player does not have permission "chatcore.admin.bypass":
 			cancel event
 			message "&7-------------------------------------------"
@@ -94,4 +139,16 @@ on chat:
 			message "&eto advertise."
 			message "&7-------------------------------------------"
 			stop
-			
+
+# Anti Swear 1 BETA #
+
+on chat:
+	if message contains {@AntiSwear}:
+		if player does not have permission "chatcore.admin.bypass":
+			cancel event
+			message "&7-------------------------------------------"
+			message "&eSwearing / Cursing is against the rules. You will be"
+			message "&epermanently muted from the server if you attempt"
+			message "&eto swear / curse again."
+			message "&7-------------------------------------------"
+			stop			

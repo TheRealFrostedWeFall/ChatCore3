@@ -1,27 +1,44 @@
+
 # ChatCore 3.0.0 is finally here # 
 
 options:
 	NoPermissionMessage: &7Sorry &e%{_p}%&7, You can't execute this command as you do not have the required permissions!
-	# This is the default "No permission message"
-	Version: 3.0
-	ConfigVersion: 1.0
+	
+	# This is the default "No permission message, edit this to whatever you want!"
+	Version: 3.0.0-PRE
+	
+	ConfigVersion: 1
 	AliasCount: 12
+	
 	CommandCount: 1
 	# Please do not edit this! #
-	SkriptName: ChatCore3
+	
+	SkriptName: ChatCore 3
 	# Make sure to enter the same name you saved your Skript as! #
+	
 	AntiHacksuation: "hack", "hax", "hacker", "cheat", "hac" or "hacks"
 	# If you think any more words should be added to the Anti Hacksuation list feel free to add them.
+	
+	AntiSwear: "bitch", "cunt", "dick", "penis", "fuck", "f u", "fuck off", "motherfucker",
+	# If you think any more words should be added or want to add another world to the list feel free to add it following the format!
+	
+	AntiAdvertisment: ".com", ".net", ".de", ".me", ".eu", "eu.", "us.", ".gg" or ".nu"
+
 	# You may disable this by scrolling down to line 90 - 94 and inserting "#" at the beginning of each line.
 	DiscordLink: discord.me/yourlink
+	
 	# Type in your discord link above so players know where to report a potential hacker.
-	ChatFormat: 
-	# Please type your exact essentials chat format however replacing {DISPLAYNAME} with %player% and {MESSAGE} with %message%! #
-	# Custom Variables List #
+	ChatFormat: &9%player's displayname%&8: &f%message%
+	
+	# Please type your exact essentials chat format however replacing {DISPLAYNAME} with %player's displayname% and {MESSAGE} with %message%! #
+
+
+# Custom Variables List #
 
 #   Variable |     | Usage | Optional Usage #
 
 # _loc:player ( Location ) - {_loc:%player%} - %{_loc:%player%}% 
+# {ChatCore3::%uuid of player%} ( Player )
 
 # Disabled Configuration Parts
 # To enable remove the "#" before and after the code, to remove it add "#" before it
