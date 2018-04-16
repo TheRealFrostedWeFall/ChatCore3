@@ -119,8 +119,23 @@ command /chatcore:
 		send "&e/chatcore &8- &7Opens up this menu"
 		send "&e/ping &8- &7Checks the players ping &f( Response time )"
 		send "&e/updatechecker &8- &7Checks to see if you require an update"
+		send "&e/chatcore3 &8- &7The main information command for ChatCore 3"		
 		send "&7"
 		send "&7Legend >> &e[] &8= &7Required &f| &b<> &8= &7Optional"
+
+
+command /ChatCore3:
+	description: The information command about ChatCore3
+	usage: /ChatCore3
+	aliases: /chatcore:ChatCore3
+	permission: chatcore.command.chatcore
+	permission message: {@NoPermissionMessage}
+	trigger:
+		send "&7"
+		send "&e&lCHATCORE 3"
+		send "&7Created By - &eFrostedWeFall
+		send "&7Version - &e{@Version}
+		send "&7"
 		
 # Anti Hacksuation Module # 
 
