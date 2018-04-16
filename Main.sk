@@ -4,7 +4,7 @@
 options:
 	NoPermissionMessage: &7Sorry &e%{ChatCore3::%uuid of player%}%&7, You can't execute this command as you do not have the required permissions!
 	
-	# This is the default "No permission message, edit this to whatever you want!"
+	# This is the default "No permission" message, edit this to whatever you want!
 	Version: 3.0.0-PRE
 	
 	ConfigVersion: 1
@@ -30,13 +30,16 @@ options:
 	
 	ChatFormat: &9%player's displayname%&8: &f%message%
 	# Please type your exact essentials chat format however replacing {DISPLAYNAME} with %player's displayname% and {MESSAGE} with %message%! #
+	
+	CommandProtectionMsg: &cYou may not execute this command. Your abuse and actions have been sent to administrators!
+	# This is the default "Command protection error" message, edit this to whatever you want!
 
 
 # Custom Variables List #
 
 #   Variable |     | Usage | Optional Usage #
 
-# _loc:player ( Location ) - {_loc:%player%} - %{_loc:%player%}% 
+# _loc::player ( Location ) - {_loc::%player%} - %{_loc::%player%}% 
 # {ChatCore3::%uuid of player%} ( Player )
 
 # Disabled Configuration Parts
@@ -152,3 +155,57 @@ on chat:
 			message "&eto swear / curse again."
 			message "&7-------------------------------------------"
 			stop			
+
+# Command Protection 1 ALPHA #
+
+command /pl:
+	trigger:
+		send "&fPlugins (1): &aChatCore3"
+
+command /plugins:
+	trigger:
+		send "&fPlugins (1): &aChatCore3"
+
+command /?:
+	trigger:
+		send "&e--------- &fHelp: Index (0/0) &e--------------------"
+
+command /help:
+	trigger:
+		send "&e---- &6Help &e-- &6Page &c1&6/&c1 &e----"
+
+command /bukkit:?:
+	trigger:
+		send "&e--------- &fHelp: Index (0/0) &e--------------------"
+
+command /bukkit:help:
+	trigger:
+		send "&e--------- &fHelp: Index (0/0) &e--------------------"
+
+command /bukkit:pl:
+	trigger:
+		send "&fPlugins (1): &aChatCore3"
+
+command /bukkit:plugins:
+	trigger:
+		send "&fPlugins (1): &aChatCore3"
+
+command /version:
+	trigger:
+		send "{@CommandProtectionMsg}"
+
+command /bukkit:version:
+	trigger:
+		send "{@CommandProtectionMsg}"
+
+command /icanhasbukkit:
+	trigger:
+		send "{@CommandProtectionMsg}
+
+command /ver:
+	trigger:
+		send "{@CommandProtectionMsg}"
+
+command /bukkit:ver:
+	trigger:
+		send "{@CommandProtectionMsg}"
