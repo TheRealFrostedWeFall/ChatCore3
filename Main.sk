@@ -24,7 +24,7 @@ options:
 	# If you think any more words should be added or want to add another world to the list feel free to add it following the format!
 	
 	AntiAdvertisment: ".com", ".net", ".de", ".me", ".eu", "eu.", "us.", ".gg" or ".nu"
-	# You may disable this by scrolling down to line 90 - 94 and inserting "#" at the beginning of each line.
+	# You may disable this by scrolling down to line 90 - 94 and inserting '#' at the beginning of each line.
 	
 	DiscordLink: discord.me/yourlink
 	# Type in your discord link above so players know where to report a potential hacker.
@@ -33,7 +33,7 @@ options:
 	# Please type your exact essentials chat format however replacing {DISPLAYNAME} with %player's displayname% and {MESSAGE} with %message%! #
 	
 	CommandProtectionMsg: &cYou may not execute this command. Your abuse and actions have been sent to administrators!
-	# This is the default "Command protection error" message, edit this to whatever you want!
+	# This is the default "Command protection error" message, edit this to whatever you want! 
 
 
 # Custom Variables List #
