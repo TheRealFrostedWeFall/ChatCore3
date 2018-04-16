@@ -1,4 +1,5 @@
 
+
 # ChatCore 3.0.0 is finally here # 
 
 options:
@@ -19,7 +20,7 @@ options:
 	AntiHacksuation: "hack", "hax", "hacker", "cheat", "hac" or "hacks"
 	# If you think any more words should be added to the Anti Hacksuation list feel free to add them.
 	
-	AntiSwear: "bitch", "cunt", "dick", "penis", "fuck", "f u", "fuck off", "motherfucker",
+	AntiSwear: "bitch", "cunt", "dick", "penis", "fuck", "f u", "fuck off" or "motherfucker"
 	# If you think any more words should be added or want to add another world to the list feel free to add it following the format!
 	
 	AntiAdvertisment: ".com", ".net", ".de", ".me", ".eu", "eu.", "us.", ".gg" or ".nu"
@@ -133,8 +134,8 @@ command /ChatCore3:
 	trigger:
 		send "&7"
 		send "&e&lCHATCORE 3"
-		send "&7Created By - &eFrostedWeFall
-		send "&7Version - &e{@Version}
+		send "&7Created By - &eFrostedWeFall"
+		send "&7Version - &e{@Version}"
 		send "&7"
 		
 # Anti Hacksuation Module # 
@@ -215,7 +216,7 @@ command /bukkit:version:
 
 command /icanhasbukkit:
 	trigger:
-		send "{@CommandProtectionMsg}
+		send "{@CommandProtectionMsg}"
 
 command /ver:
 	trigger:
