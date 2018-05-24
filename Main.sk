@@ -1,20 +1,25 @@
+# Changelog #
 
+- Shortened Permission Nodes
+- Added Report Command
+- Fixed Error in Permission message
+- Added report command to help menus
 
 # ChatCore 3.0.0 is finally here # 
+# Please have a read through all of the configuration section. This Skript is extremely customizable.
 
 options:
-	NoPermissionMessage: &7Sorry &e%{ChatCore3::%uuid of player%}%&7, You can't execute this command as you do not have the required permissions!
+	Version: 3.0.0-PRE 3
 	
-	# This is the default "No permission" message, edit this to whatever you want!
-	Version: 3.0.0-PRE
-	
-	ConfigVersion: 1
+	ConfigVersion: 1.1
 	AliasCount: 12
 	
-	CommandCount: 1
+	CommandCount: 5
 	# Please do not edit this! #
-	
-	SkriptName: ChatCore 3
+
+	NoPermissionMessage: &7Sorry &7, You can't execute this command as you do not have the required permissions!
+	# This is the default "No permission" message, edit this to whatever you want!
+	SkriptName: ChatCore3
 	# Make sure to enter the same name you saved your Skript as! #
 	
 	AntiHacksuation: "hack", "hax", "hacker", "cheat", "hac" or "hacks"
@@ -29,11 +34,20 @@ options:
 	DiscordLink: discord.me/yourlink
 	# Type in your discord link above so players know where to report a potential hacker.
 	
-	ChatFormat: &9%player's displayname%&8: &f%message%
-	# Please type your exact essentials chat format however replacing {DISPLAYNAME} with %player's displayname% and {MESSAGE} with %message%! #
+	ChatFormat: &9%player's displayname%&8: &f%message% # Default Chat Format #
+	# Please type your exact essentials chat format however replacing {DISPLAYNAME} with %player's displayname% and {MESSAGE} with %message%! 
 	
 	CommandProtectionMsg: &cYou may not execute this command. Your abuse and actions have been sent to administrators!
 	# This is the default "Command protection error" message, edit this to whatever you want! 
+	
+	ReportDelay: 60 # Default Timeout #
+	# How long do you want players to have to wait before sending another report? **SECONDS ONLY**
+	
+	ReportDelayMessage: &7Sorry, you must wait &e60 Seconds&7 before you can report another player to prevent spam.# Default Message #
+	# The message sent back to a player after they try to report another player during the cooldown
+	
+	ReportAdmins: * # Default Option set to * #
+	# The admin permission that allows only certain people to see reports that are sent by players. [e.g rank.admin - chatcore.admin etc]
 
 
 # Custom Variables List #
@@ -44,24 +58,24 @@ options:
 # {ChatCore3::%uuid of player%} ( Player )
 
 # Disabled Configuration Parts
-# To enable remove the "#" before and after the code, to remove it add "#" before it
+# To enable remove the # before and after the code, to remove it add "#" before it
 
-# Line 30 | 35 - On join UpdateChecker = Disabled
+# Line 30 | 35 - On join UpdateChecker = Enabled
 
 # On join functions #
 
 on first join:
-	set {ChatCore3::%uuid of player%} to player
+	set {ChatCore3::%player%} to player
 
 
 # Updater Module #
 	
-#on join:
-#	if player has permission "chatcore.admincommand.updatechecker" or "chatcore.*" or "chatcore.admin.*":
-#		if text from "https://pastebin.com/raw/SYPBx4NQ" is "3.0.0-PRE":
-#			send "&a&lCOMPLETE&7! You have the latest version of &eChatCore 3&7!"
-#		if text from "https://pastebin.com/raw/SYPBx4NQ" is not "3.0.0-PRE":
-#			send "&c&lWARNING&7! You have not got the latest version of &eChatCore 3&7! Please download the &clatest version&7!"
+on join:
+	if player has permission "chatcore.updatechecker" or "chatcore.*" or "chatcore.admin.*":
+		if text from "https://pastebin.com/raw/SYPBx4NQ" is "3.0.0-PRE":
+			send "&a&lCOMPLETE&7! You have the latest version of &eChatCore 3&7!"
+		if text from "https://pastebin.com/raw/SYPBx4NQ" is not "3.0.0-PRE":
+			send "&c&lWARNING&7! You have not got the latest version of &eChatCore 3&7! Please download the &clatest version&7!"
 
 		
 command /updatechecker:
@@ -88,6 +102,7 @@ command /ping:
 	trigger:
 		send "&7Ping Test"
 		send "%nl%&7Player Name - &e%player%%nl%"
+		send "&b%player's ping% &7ms ( If you don't have WildSkript you will only see the variable. )"
 		
 # Skript Reloader Command #
 
@@ -112,7 +127,7 @@ command /chatcore:
 	description: Main command and help menu for ChatCore 3
 	usage: /chatcore
 	aliases: /chatcore:chatcore
-	permission: chatcore.command.chatcore
+	permission: chatcore.chatcore
 	permission message: {@NoPermissionMessage}
 	trigger:
 		send "&7"
@@ -120,7 +135,8 @@ command /chatcore:
 		send "&e/chatcore &8- &7Opens up this menu"
 		send "&e/ping &8- &7Checks the players ping &f( Response time )"
 		send "&e/updatechecker &8- &7Checks to see if you require an update"
-		send "&e/chatcore3 &8- &7The main information command for ChatCore 3"		
+		send "&e/chatcore3 &8- &7The main information command for ChatCore 3"
+		send "&e/report [user] [reason] &8- &7Allows you to report any user"
 		send "&7"
 		send "&7Legend >> &e[] &8= &7Required &f| &b<> &8= &7Optional"
 
@@ -129,7 +145,7 @@ command /ChatCore3:
 	description: The information command about ChatCore3
 	usage: /ChatCore3
 	aliases: /chatcore:ChatCore3
-	permission: chatcore.command.chatcore
+	permission: chatcore.chatcore
 	permission message: {@NoPermissionMessage}
 	trigger:
 		send "&7"
@@ -141,7 +157,7 @@ command /ChatCore3:
 # Anti Hacksuation Module # 
 
 on chat:
-	if player doesn't have permission "chatcore.admin.bypass":
+	if player doesn't have permission "chatcore.bypass":
 		if message contains {@AntiHacksuation}:
 			cancel event
 			send "&cNOTE: &7Accusing players of cheating in-game is against the rules. If you think someone is cheating, please gather evidence and report it at &a{@DiscordLink}" 
@@ -150,7 +166,7 @@ on chat:
 # More  
 on chat:
 	if message contains {@AntiAdvertisment}:
-		if player does not have permission "chatcore.admin.bypass":
+		if player does not have permission "chatcore.bypass":
 			cancel event
 			message "&7-------------------------------------------"
 			message "&eAdvertising is against the rules. You will be"
@@ -163,7 +179,7 @@ on chat:
 
 on chat:
 	if message contains {@AntiSwear}:
-		if player does not have permission "chatcore.admin.bypass":
+		if player does not have permission "chatcore.bypass":
 			cancel event
 			message "&7-------------------------------------------"
 			message "&eSwearing / Cursing is against the rules. You will be"
@@ -172,6 +188,41 @@ on chat:
 			message "&7-------------------------------------------"
 			stop			
 
+# Commands #
+command /report <player> <text>:
+	description: Report players with this command.
+	usage: /report [<player>] [<reason>].
+	permission:
+	trigger:
+		if arg 1 is not set:
+			send "&7Usage: &e/report <player> <reason>"
+			stop
+		if arg 2 is not set:
+			send "&7Usage: &e/report <player> <reason>"
+			stop
+		if arg 1 is a player:
+			if arg 2 is set:
+				set {_waited} to difference between {chatcorereport.%player%.lastused} and now
+				if {_waited} is less than {@Reportdelay} seconds:
+					message "{@ReportDelayMessage}"
+					stop
+				if arg-1 is "%player%":
+					message "&cError: You can not report yourself!"
+					stop
+				loop all players:
+					loop-player has the permission "{@ReportAdmins}":
+						send "&7&m--------------------------------" to loop-player
+						send "&e&lNEW REPORT" to loop-player
+						send "&7Reported Player: &e%arg-1%" to loop-player
+						send "&7Reporting Player: &e%player%" to loop-player
+						send "&7Reason: &3%arg-2%" to loop-player
+						send "&7&m--------------------------------" to loop-player
+						set {chatcorereport.%player%.lastused} to now
+				message "{@Prefix} &7You have &asuccessfully reported &7%arg-1% &7for &7%arg-2%&7."
+
+				
+				
+				
 # Command Protection 1 ALPHA #
 
 command /pl:
